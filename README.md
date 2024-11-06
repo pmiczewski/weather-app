@@ -13,7 +13,7 @@
 
    ```bash
    git clone https://github.com/pmiczewski/weather-app.git
-   cd your-repo
+   cd weather-app
    ```
 
 2. **Set up your environment**
@@ -39,7 +39,14 @@
    ```bash
    ./vendor/bin/sail up
    ```
+
+    Migrate and seed the database:
+
+   ```bash
+   ./vendor/bin/sail artisan migrate --seed
+   ```
    Once the containers are up and running, build the assets:
+
    ```bash
    ./vendor/bin/sail npm run dev
    ```
@@ -49,11 +56,12 @@
    The application should now be running. Open your browser and go to: localhost
 
 ## Additional Notes
-   * Make sure Docker is running before starting the application.
-   * If you're encountering any issues, try rebuilding the containers:
+   - Make sure Docker is running before starting the application.
+   - If you're encountering any issues, try rebuilding the containers:
 
    ```bash
    ./vendor/bin/sail down
    ./vendor/bin/sail up --build
    ```
 
+   - By default, Sail creates a separate testing database to prevent interference with your main database. Before testing, ensure you migrate the testing database

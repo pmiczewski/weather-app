@@ -54,4 +54,20 @@ class ForecastTest extends TestCase
                 ->where('forecasts.3', $expectedForecastData[3])
         );
     }
+
+    public function testFailingToFetchForecastReturnsServerError(): void
+    {
+        $user = User::factory()->create();
+
+        Http::fake(['*' => Http::response([], 404)]);
+
+        $response = $this
+            ->actingAs($user)
+            ->post(route('forecast.fetch'), [
+                'city' => 'ANDALUSIA',
+                'state' => 'ALABAMA',
+            ]);
+
+        $response->assertServerError();
+    }
 }

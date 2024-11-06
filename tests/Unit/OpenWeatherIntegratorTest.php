@@ -48,7 +48,7 @@ class OpenWeatherIntegratorTest extends TestCase
         $this->assertEquals($expectedForecastData, $result);
     }
 
-    public function testShouldThrowExceptionWhenHttp(): void
+    public function testShouldThrowExceptionWhenHttpResponseCodeIsOtherThan2XX(): void
     {
         Http::fake(['*' => Http::response([], 500)]);
 
