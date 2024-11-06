@@ -34,13 +34,24 @@
 
 4. **Run the application**
 
+   Install dependencies:
+
+   ```bash
+   docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v "$(pwd):/var/www/html" \
+    -w /var/www/html \
+    laravelsail/php83-composer:latest \
+    composer install --ignore-platform-reqs
+    ```
+
    Start Docker containers using Laravel Sail:
 
    ```bash
    ./vendor/bin/sail up
    ```
 
-    Migrate and seed the database:
+   Migrate and seed the database:
 
    ```bash
    ./vendor/bin/sail artisan migrate --seed
@@ -56,12 +67,12 @@
    The application should now be running. Open your browser and go to: localhost
 
 ## Additional Notes
-   - Make sure Docker is running before starting the application.
-   - If you're encountering any issues, try rebuilding the containers:
+- Make sure Docker is running before starting the application.
+- If you're encountering any issues, try rebuilding the containers:
 
    ```bash
    ./vendor/bin/sail down
    ./vendor/bin/sail up --build
    ```
 
-   - By default, Sail creates a separate testing database to prevent interference with your main database. Before testing, ensure you migrate the testing database
+- By default, Sail creates a separate testing database to prevent interference with your main database. Before testing, ensure you migrate the testing database
